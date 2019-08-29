@@ -34,7 +34,7 @@ class WeiboGatewayTest extends TestCase
         $this->assertTrue($response->isRedirect());
 
         $this->assertContains(
-            'https://pay.sc.weibo.com/api/merchant/pay/cashier',
+            'https://pay.sc.weibo.com/api/merchant/pay/cashier?',
             $response->getTargetUrl()
         );
     }

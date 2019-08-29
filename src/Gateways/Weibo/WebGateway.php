@@ -24,7 +24,7 @@ class WebGateway implements GatewayInterface
 
         Events::dispatch(new PayStarted('Weibo', 'Web', $endpoint, $payload));
 
-        return RedirectResponse::create($endpoint.'cashier'.'&'.http_build_query($payload));
+        return RedirectResponse::create($endpoint.'cashier'.'?'.http_build_query($payload));
     }
 
     /**
