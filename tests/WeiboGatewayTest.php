@@ -112,7 +112,7 @@ class WeiboGatewayTest extends TestCase
     {
         $app = Payment::weibo($this->config());
 
-        $data = ['foo' => 'bar'];
+        $data = ['foo' => 'bar', 'body' => null];
         $data['sign'] = Support::generateSign($data);
 
         $this->assertInstanceof(Collection::class, $app->verify($data));

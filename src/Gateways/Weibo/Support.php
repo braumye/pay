@@ -167,7 +167,7 @@ class Support
 
         $stringToBeSigned = '';
         foreach($data as $k => $v) {
-            if (! (in_array($k, ['sign', 'sign_type', 'endpoint']) || $v === '')) {
+            if (! (in_array($k, ['sign', 'sign_type', 'endpoint']) || $v === '' || is_null($v))) {
                 $stringToBeSigned .= $k.'='.$v.'&';
             }
         }
