@@ -13,7 +13,7 @@ class RefundGateway
     public function find($order): array
     {
         $config = [
-            'endpoint' => 'refund/query',
+            'endpoint' => 'pay/refund/query',
         ];
 
         if (is_string($order)) {
