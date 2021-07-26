@@ -24,7 +24,7 @@ class WebGateway implements GatewayInterface
 
         Events::dispatch(new PayStarted('Weibo', 'Web', $endpoint, $payload));
 
-        return RedirectResponse::create($endpoint.'cashier'.'?'.http_build_query($payload));
+        return RedirectResponse::create($endpoint.'pay/cashier'.'?'.http_build_query($payload));
     }
 
     /**
@@ -36,7 +36,7 @@ class WebGateway implements GatewayInterface
     public function find($order): array
     {
         return [
-            'endpoint' => 'query',
+            'endpoint' => 'pay/query',
             'out_pay_id' => $order['out_pay_id'] ?? $order,
         ];
     }
