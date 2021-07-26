@@ -56,7 +56,7 @@ class Support
      */
     private function __construct(Config $config)
     {
-        $this->baseUri = 'https://pay.sc.weibo.com/api/merchant/pay/';
+        $this->baseUri = 'https://pay.sc.weibo.com/api/merchant/';
         $this->config = $config;
 
         $this->setHttpOptions();
