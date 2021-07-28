@@ -40,9 +40,8 @@ class TransferConfirmGateway implements GatewayInterface
      */
     public function find($order): array
     {
-        return [
+        return array_merge([
             'endpoint' => 'transfer/query',
-            'transfer_id' => $order['transfer_id'] ?? $order,
-        ];
+        ], $order);
     }
 }
