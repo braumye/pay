@@ -9,6 +9,7 @@ use Yansongda\Supports\Collection;
 use Yansongda\Pay\Events\SignFailed;
 use Yansongda\Pay\Events\PayStarting;
 use Yansongda\Pay\Events\MethodCalled;
+use Braumye\Pay\Gateways\Weibo\FindWithoutSellerID;
 use Braumye\Pay\Gateways\Weibo\Support;
 use Yansongda\Pay\Events\RequestReceived;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,13 +89,17 @@ class Weibo implements GatewayApplicationInterface
     {
         $gateway = get_class($this).'\\'.Str::studly($type).'Gateway';
 
-        if (!class_exists($gateway) || !is_callable([new $gateway(), 'find'])) {
+        if (!class_exists($gateway) || !is_callable([$gatewayInstance = new $gateway(), 'find'])) {
             throw new GatewayException("{$gateway} Done Not Exist Or Done Not Has FIND Method");
         }
 
-        $config = call_user_func([new $gateway(), 'find'], $order);
+        $config = call_user_func([$gatewayInstance, 'find'], $order);
         $config['sign_type'] = $this->payload['sign_type'];
-        $config['seller_id'] = $this->payload['seller_id'];
+        
+        if (! $gatewayInstance instanceof FindWithoutSellerID) {
+            $config['seller_id'] = $this->payload['seller_id'];
+        }
+        
         $config['sign'] = Support::generateSign($config);
 
         Events::dispatch(new Events\MethodCalled('Weibo', 'Find', $this->gateway.$config['endpoint'], $config));
