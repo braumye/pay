@@ -2,6 +2,7 @@
 
 namespace Braumye\Pay\Gateways\Weibo;
 
+use Braumye\Pay\Gateways\Weibo\FindWithoutSellerID;
 use Braumye\Pay\Gateways\Weibo\Support;
 use Yansongda\Pay\Contracts\GatewayInterface;
 use Yansongda\Pay\Events;
@@ -10,7 +11,7 @@ use Yansongda\Pay\Exceptions\InvalidConfigException;
 use Yansongda\Pay\Exceptions\InvalidSignException;
 use Yansongda\Supports\Collection;
 
-class TransferConfirmGateway implements GatewayInterface
+class TransferConfirmGateway implements GatewayInterface, FindWithoutSellerID
 {
     /**
      * Pay an order.
