@@ -100,11 +100,14 @@ class Weibo implements GatewayApplicationInterface
             $config['seller_id'] = $this->payload['seller_id'];
         }
         
+        $endpoint = $config['endpoint'];
+        unset($config['endpoint']);
+        
         $config['sign'] = Support::generateSign($config);
 
-        Events::dispatch(new Events\MethodCalled('Weibo', 'Find', $this->gateway.$config['endpoint'], $config));
+        Events::dispatch(new Events\MethodCalled('Weibo', 'Find', $this->gateway.$endpoint, $config));
 
-        return Support::requestApi($config['endpoint'], $config);
+        return Support::requestApi($endpoint, $config);
     }
 
     /**
